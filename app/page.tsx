@@ -1,103 +1,256 @@
-import Image from "next/image";
+import Link from "next/link"
+import { ArrowRight, Sparkles, Zap, Shield, TrendingUp } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { ToolCard } from "@/components/tool-card"
+import { aiTools, categories, getFeaturedTools, getNewTools } from "@/lib/data"
 
-export default function Home() {
+export default function HomePage() {
+  const featuredTools = getFeaturedTools().slice(0, 6)
+  const newTools = getNewTools().slice(0, 4)
+  const totalTools = aiTools.length
+  const totalCategories = categories.length
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="flex flex-col">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden border-b border-border">
+        <div className="absolute inset-0 bg-gradient-to-br from-card via-background to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-chart-2/10 via-transparent to-transparent" />
+        
+        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 sm:py-32 lg:px-8">
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge variant="secondary" className="mb-6">
+              <Sparkles className="mr-1.5 h-3 w-3" />
+              {totalTools}+ AI Tools Cataloged
+            </Badge>
+            
+            <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl text-balance">
+              Discover the Best{" "}
+              <span className="bg-gradient-to-r from-chart-1 via-chart-2 to-chart-4 bg-clip-text text-transparent">
+                AI Tools
+              </span>{" "}
+              for Every Task
+            </h1>
+            
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed text-balance">
+              Explore our curated directory of {totalTools}+ AI-powered solutions across {totalCategories} categories. 
+              Find the perfect tool for writing, design, coding, video production, and more.
+            </p>
+            
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button asChild size="lg" className="w-full sm:w-auto">
+                <Link href="/tools">
+                  Browse All Tools
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="w-full sm:w-auto bg-transparent">
+                <Link href="/categories">
+                  Explore Categories
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Stats Section */}
+      <section className="border-b border-border bg-card/50">
+        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+            <div className="text-center">
+              <p className="text-3xl font-bold text-foreground">{totalTools}+</p>
+              <p className="mt-1 text-sm text-muted-foreground">AI Tools</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-foreground">{totalCategories}</p>
+              <p className="mt-1 text-sm text-muted-foreground">Categories</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-foreground">100K+</p>
+              <p className="mt-1 text-sm text-muted-foreground">Monthly Visitors</p>
+            </div>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-foreground">4.8</p>
+              <p className="mt-1 text-sm text-muted-foreground">Avg. Rating</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Tools */}
+      <section className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex items-end justify-between">
+            <div>
+              <Badge variant="secondary" className="mb-3">
+                <TrendingUp className="mr-1.5 h-3 w-3" />
+                Featured
+              </Badge>
+              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+                Top AI Tools
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                Hand-picked tools that are leading the AI revolution.
+              </p>
+            </div>
+            <Button asChild variant="ghost" className="hidden sm:flex">
+              <Link href="/tools">
+                View all
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {featuredTools.map((tool) => (
+              <ToolCard key={tool.id} tool={tool} variant="featured" />
+            ))}
+          </div>
+
+          <div className="mt-8 text-center sm:hidden">
+            <Button asChild variant="outline">
+              <Link href="/tools">
+                View all tools
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Grid */}
+      <section className="border-y border-border bg-card/50 py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+              Browse by Category
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              Find AI tools organized by their primary use case.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {categories.map((category) => (
+              <Link
+                key={category.slug}
+                href={`/categories/${category.slug}`}
+                className="group flex flex-col rounded-xl border border-border bg-card p-5 transition-all hover:border-muted-foreground/30 hover:bg-accent/50"
+              >
+                <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
+                  {category.name}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {category.count} tools
+                </p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* New Tools */}
+      {newTools.length > 0 && (
+        <section className="py-16 sm:py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex items-end justify-between">
+              <div>
+                <Badge variant="secondary" className="mb-3 bg-chart-1/20 text-chart-1">
+                  <Sparkles className="mr-1.5 h-3 w-3" />
+                  Recently Added
+                </Badge>
+                <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+                  New AI Tools
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  The latest additions to our directory.
+                </p>
+              </div>
+              <Button asChild variant="ghost" className="hidden sm:flex">
+                <Link href="/tools?filter=new">
+                  View all new
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+
+            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {newTools.map((tool) => (
+                <ToolCard key={tool.id} tool={tool} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Features Section */}
+      <section className="border-t border-border bg-card/50 py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+              Why AI ToolsHub?
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              We make it easy to find and compare the best AI tools.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-8 sm:grid-cols-3">
+            <div className="text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-chart-1/20">
+                <Zap className="h-6 w-6 text-chart-1" />
+              </div>
+              <h3 className="mt-4 font-semibold text-foreground">Curated Selection</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Every tool is hand-picked and verified for quality and usefulness.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-chart-2/20">
+                <Shield className="h-6 w-6 text-chart-2" />
+              </div>
+              <h3 className="mt-4 font-semibold text-foreground">Unbiased Reviews</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Honest ratings and reviews from real users, not sponsored content.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-chart-4/20">
+                <TrendingUp className="h-6 w-6 text-chart-4" />
+              </div>
+              <h3 className="mt-4 font-semibold text-foreground">Always Updated</h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                New tools added weekly. Stay ahead of the AI curve.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 sm:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative overflow-hidden rounded-2xl border border-border bg-card p-8 sm:p-12">
+            <div className="absolute inset-0 bg-gradient-to-br from-chart-2/5 via-transparent to-chart-4/5" />
+            <div className="relative mx-auto max-w-2xl text-center">
+              <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+                Ready to supercharge your workflow?
+              </h2>
+              <p className="mt-4 text-muted-foreground">
+                Explore our complete directory and find the perfect AI tools for your needs.
+              </p>
+              <Button asChild size="lg" className="mt-8">
+                <Link href="/tools">
+                  Get Started
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
-  );
+  )
 }
